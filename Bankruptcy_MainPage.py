@@ -11,7 +11,7 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 from pickle import load
 
-df_bank = pd.read_csv('/Users/radhikavittalshenoy/Downloads/df_bank.csv')
+df_bank = pd.read_csv('df_bank.csv')
 #print(st.session_state['userID'])
 image_url = '''
     <style>
@@ -134,9 +134,6 @@ if selected == 'Fiscal Collapse Check':
     st.markdown('<p style="text-align:justify;font-weight:bold;">This section allows you to upload a new financial record data. Make sure to upload a data file of the specified file format which follows the dataset allowed factors list</p>',unsafe_allow_html = True)
     uploaded_file = st.file_uploader("Please upload the test data in csv file format", type=['xlsx',"csv"])
     if uploaded_file is not None:
-        # File upload successful
-        df_bank = pd.read_csv('/Users/radhikavittalshenoy/Downloads/df_bank_new.csv')
-
         # Process the uploaded file (you can customize this part based on your needs)
         try:
             if uploaded_file.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
@@ -144,14 +141,12 @@ if selected == 'Fiscal Collapse Check':
             else:
 
                 df = pd.read_csv(uploaded_file)
-                columns_equal = list(df.columns) == list(df_bank.columns)
-                df_equal = df.equals(df_bank)
                 st.success("File uploaded successfully to the database!")
                 if st.checkbox("View file"):
                     st.write("Uploaded Data:")
                     st.write(df)
                 if st.button("Predict"):
-                    test = pd.read_csv('/Users/radhikavittalshenoy/Downloads/test_f.csv')
+                    test = pd.read_csv('test_f.csv')
                     test = test.drop("X4", axis=1)
                     test = test.drop("X13", axis=1)
                     test = test.drop("X16", axis=1)
@@ -162,12 +157,12 @@ if selected == 'Fiscal Collapse Check':
                     test=test.iloc[:,[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,15]]
 
                     
-                    scaler = load(open('/Users/radhikavittalshenoy/Downloads/scaler.pkl', 'rb'))
+                    scaler = load(open('scaler.pkl', 'rb'))
                     test.iloc[:,:-1]=scaler.transform(test.iloc[:,:-1])
                     X_new=[]
                     X_new.append(test.values)
                     X_new=np.array(X_new)
-                    model_new = load_model('/Users/radhikavittalshenoy/Downloads/rnn_20240416-101623.keras')
+                    model_new = load_model('rnn_20240416-101623.keras')
                     output = model_new.predict(X_new, batch_size=64,verbose=1)
                     binary_predictions = (output >= 0.5).astype(int)
                     binary_predictions_list = binary_predictions.flatten().tolist()
