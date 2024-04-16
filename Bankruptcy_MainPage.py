@@ -11,7 +11,7 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 from pickle import load
 
-df_bank = pd.read_csv('df_bank_alive.csv')
+df_bank = pd.read_csv('df_bank_alive_new.csv')
 #print(st.session_state['userID'])
 image_url = '''
     <style>
