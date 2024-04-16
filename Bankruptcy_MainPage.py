@@ -43,7 +43,7 @@ if selected == 'Fiscal Stats Gallery':
     df_bank['X6'].fillna(0, inplace=True)
     df_bank['X18'].fillna(0, inplace=True)
 
-    filtered_df = df_bank[df_bank['company_name'] == 'C_1']
+    filtered_df = df_bank[df_bank['company_name'] == 'C_10']
 
     # Create scatter plot using Plotly Express
     fig = px.scatter(filtered_df, x='year', y='X6', color='status_label', title="Variation in the Net Income over the years",
@@ -84,7 +84,7 @@ if selected == 'Fiscal Stats Gallery':
     st.plotly_chart(fig, use_container_width=True)
 
         # Filter data for the selected company
-    company_data = df_bank[df_bank['company_name'] == 'C_1']
+    company_data = df_bank[df_bank['company_name'] == 'C_10']
     company_name = df_bank['company_name']
     # Count the status values
     status_counts = company_data['status_label'].value_counts()
@@ -116,12 +116,12 @@ if selected == 'Fiscal Stats Gallery':
 
 
         # Filter data by company
-    filtered_df = df_bank[df_bank['company_name'] == 'C_1']
+    filtered_df = df_bank[df_bank['company_name'] == 'C_10']
 
     # Plot using Seaborn with better label handling
     plt.figure(figsize=(10, 4))
     ax = sns.lineplot(data=filtered_df, x='year', y='X6', hue='status_label')
-    plt.title("The trend for Company C_1")
+    plt.title("The trend for Company C_10")
 
     # Improve the x-axis label readability
     plt.xticks(rotation=45)  # Rotate labels to prevent overlap
