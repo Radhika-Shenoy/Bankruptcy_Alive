@@ -62,7 +62,7 @@ if selected == 'Fiscal Stats Gallery':
     total_x14 = df_bank['X14'].sum()
 
     # Data for the pie chart
-    labels = ['X18', 'X14']
+    labels = ['Operating costs', 'Current Liabilities']
     values = [total_x18, total_x14]
     colors = ['#FF9999', '#66B3FF']  # Custom colors for the pie chart
 
