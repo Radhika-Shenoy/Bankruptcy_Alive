@@ -166,9 +166,9 @@ if selected == 'Fiscal Collapse Check':
                     output = model_new.predict(X_new, batch_size=64,verbose=1)
                     binary_predictions = (output >= 0.5).astype(int)
                     binary_predictions_list = binary_predictions.flatten().tolist()
-                    x_labels = ["Year" f"{i} " for i in range(1, 11)]
+                    x_labels = ["Year" f"{i} " for i in range(1, 6)]
                     fig = go.Figure()
-                    fig.add_trace(go.Scatter(x=x_labels, y=binary_predictions_list, mode='lines+markers'))
+                    fig.add_trace(go.Scatter(x=x_labels, y=binary_predictions_list[:5], mode='lines+markers'))
                     fig.update_layout(title='Binary Predictions Line Chart', xaxis_title='Index', yaxis_title='Company Bankruptcy Status')
                     fig.update_yaxes(tickvals=[0, 1])
                     st.plotly_chart(fig)
